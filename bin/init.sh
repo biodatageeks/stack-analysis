@@ -16,11 +16,13 @@ repo_name: $PROJECT_NAME
 python_package: ${PROJECT_NAME//-/_}
 EOF
 
-kedro new --starter https://github.com/biodatageeks/kedro-pyspark --config $CONFIG_FILE --checkout feature/mlflow
+kedro new --starter https://github.com/biodatageeks/kedro-pyspark --checkout master --config $CONFIG_FILE
 rm $CONFIG_FILE
 cd $HOME/work/git/$PROJECT_NAME
 kedro install
-kedro mflow init
+kedro mlflow init
+sed -i 's/mlflow_tracking_uri: mlruns/mlflow_tracking_uri: http:\/\/localhost:5000/g' conf/local/mlflow.yml
+cp conf/local/mlflow.yml conf/local-spark/
 conda deactivate
 
 
