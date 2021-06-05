@@ -6,8 +6,7 @@ PROJECT_NAME=ds-project
 VENV_DIR=$HOME/work/venv/$PROJECT_NAME
 conda create python=$PYTHON_MINOR -p $VENV_DIR -y 
 conda activate $VENV_DIR
-pip install kedro==$KEDRO_VERSION kedro-viz
-pip install pandas==1.1.4 PyArrow==0.15.1
+pip install kedro==$KEDRO_VERSION
 
 CONFIG_FILE=config.yaml
 cat <<EOF >> $CONFIG_FILE
@@ -17,10 +16,11 @@ repo_name: $PROJECT_NAME
 python_package: ${PROJECT_NAME//-/_}
 EOF
 
-kedro new --starter https://github.com/biodatageeks/kedro-pyspark --config $CONFIG_FILE --checkout 0.17.7
+kedro new --starter https://github.com/biodatageeks/kedro-pyspark --config $CONFIG_FILE --checkout feature/mlflow
 rm $CONFIG_FILE
 cd $HOME/work/git/$PROJECT_NAME
 kedro install
+kedro mflow init
 conda deactivate
 
 
