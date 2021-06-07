@@ -25,6 +25,10 @@ input_data:
 # In particular, the `assign` copy mode ensures that the `MemoryDataSet` will be assigned
 # the Spark object itself, not a deepcopy version of it, since deepcopy doesn't work with
 # Spark object generally.
+#example_classifier:
+#  type: MemoryDataSet
+#  copy_mode: assign
+
 example_classifier:
-  type: MemoryDataSet
-  copy_mode: assign
+    type: kedro_mlflow.io.models.MlflowModelLoggerDataSet
+    flavor: mlflow.spark
