@@ -60,3 +60,4 @@
 2021-06-04 18:47:17,259 - kedro.framework.session.session - WARNING - Unable to git describe /home/jovyan/kedro_pyspark
 2021-06-04 18:49:05,018 - kedro.framework.session.store - INFO - `read()` not implemented for `BaseSessionStore`. Assuming empty store.
 2021-06-04 18:49:05,024 - kedro.framework.session.session - WARNING - Unable to git describe /home/jovyan/kedro_pyspark
+2021-06-07 12:02:55,921 - kedro.framework.session.store - INFO - `read()` not implemented for `BaseSessionStore`. Assuming empty store.
