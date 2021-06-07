@@ -1,12 +1,19 @@
 #!/bin/bash
 
-echo "Creating venv for ML project"
 source /opt/conda/etc/profile.d/conda.sh
 PROJECT_NAME=ds-project
 VENV_DIR=$HOME/work/venv/$PROJECT_NAME
-conda create python=$PYTHON_MINOR -p $VENV_DIR -y 
-conda activate $VENV_DIR
-pip install kedro==$KEDRO_VERSION
+if [ ! -d $VENV_DIR ] 
+then
+        echo "Creating venv for ML project"
+        conda create python=$PYTHON_MINOR -p $VENV_DIR -y 
+        conda activate $VENV_DIR
+        pip install kedro==$KEDRO_VERSION
+else
+        echo "Venv for ML project already exists"
+        conda activate $VENV_DIR
+fi
+
 
 CONFIG_FILE=config.yaml
 cat <<EOF >> $CONFIG_FILE
@@ -47,3 +54,5 @@ echo -e "
 \"display_name\": \"Kedro (datascience)\",
 \"language\": \"python\"
 }" > $HOME/.local/share/jupyter/kernels/$KERNEL_NAME/kernel.json
+
+conda activate $VENV_DIR
